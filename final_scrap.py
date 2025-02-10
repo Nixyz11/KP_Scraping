@@ -62,7 +62,69 @@ def scrape_pages_of_pagination_new(url):
     print("Last span value:", last_span_value)
     return last_span_value
 
+# Function to scrape all product links on a page
+""" def scrape_all_prods(page_url):
 
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.76"
+    }
+    
+    try:
+        # Send a GET request to the URL
+        response = requests.get(page_url, headers=headers)
+        response.raise_for_status()  # Raise an exception for HTTP errors (e.g., 404, 500)
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching the URL: {e}")
+        return None
+
+    # Parse the HTML content
+    soup = BeautifulSoup(response.content, "html.parser")
+    
+    # Locate the parent div with the specified classes
+    parent_div = soup.find("div", class_="Grid_col-lg-10__FPLVk Grid_col-xs__w58_v Grid_col-sm__DsLxt Grid_col-md__eg0dB")
+
+    # Check if the parent div is found
+    if parent_div:
+        # Find the first direct child div inside the parent div
+        first_child_div = parent_div.find("div", recursive=False)
+        
+        if first_child_div:
+            # Find all direct child elements (section, div, etc.) inside the first child div
+            child_elements = first_child_div.find_all(recursive=False)
+            
+            # Check if there are at least 3 child elements
+            if len(child_elements) >= 3:
+                # Target the third child element (index 2 because Python uses zero-based indexing)
+                target_div = child_elements[2]
+                
+                # Ensure the third child is a div (optional, for safety)
+                if target_div.name == "div":
+                    # Find all <a> tags inside the target div that have an href attribute
+                    product_links = target_div.find_all("a", href=True)
+                    print(product_links)
+                    
+                    # Extract the href attributes from the <a> tags
+                    product_hrefs = [link["href"] for link in product_links]
+                    # Remove duplicates by converting the list to a set and back to a list
+                    unique_links = list(set(product_hrefs))
+                    filtered_links = [link for link in unique_links if 'https' or 'promocije' not in link]
+
+                    # Print the list without duplicates
+                    print('filtering links')
+                    print(filtered_links)
+                    # Return the list of product links
+                    return filtered_links
+                else:
+                    print("The third child is not a div.")
+            else:
+                print("The first child div does not have at least 3 child elements.")
+        else:
+            print("First child div not found inside the parent div.")
+    else:
+        print("Parent div not found.")
+    
+    # Return an empty list if no links are found
+    return [] """
 
 # Function to iterate through all pages and scrape product links
 def iterate_through_pages(base_url):
