@@ -1,0 +1,30 @@
+# Ignore compiled files
+*.class
+*.exe
+*.pyc
+*.yml
+dockerfile
+dockerfile.example
+# Ignore dependency directories
+node_modules/
+venv/
+
+# Ignore environment files
+.env
+.env.local
+
+# Ignore log files
+*.log
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE-specific files
+.idea/
+.vscode/
+
+# Ignore build/output directories
+build/
+dist/
+out/
